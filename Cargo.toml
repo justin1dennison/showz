@@ -1,0 +1,18 @@
+[package]
+name = "showz"
+version = "0.1.0"
+authors = ["Justin Dennison <justin1dennison@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+structopt = "0.3.12"
+async-std = { version = "1.5.0", features = ["attributes"] }
+anyhow = "1.0.28"
+rusqlite = "0.23.1"
+sql-builder = "0.12.0"
+glob = "0.3.0"
+config = "0.10.1"
+maplit = "1.0.2"
+askama = "0.9.0"
