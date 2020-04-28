@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS "resources" (
 	id INTEGER PRIMARY KEY NOT NULL, 
 	name TEXT NOT NULL, 
 	episode_id INTEGER NOT NULL,
+	created_at TEXT DEFAULT CURRENT_TIMESTAMP,
 	FOREIGN KEY
 	  (episode_id) REFERENCES episodes (id)
 );

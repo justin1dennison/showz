@@ -1,12 +1,11 @@
 use structopt::StructOpt;
 
 pub(crate) const APP_NAME: &str = env!("CARGO_PKG_NAME");
-pub(crate) const SCHEMA_GLOB: &str = "schema/*sql";
 
 mod handlers;
 mod types;
 
-use handlers::{config, episode, init, testing, resource};
+use handlers::{config, episode, init, resource, testing};
 use types::{CliResult, EpisodeCommand};
 
 #[derive(StructOpt, Debug)]
@@ -26,6 +25,7 @@ enum Opt {
 
 #[async_std::main]
 async fn main() -> CliResult {
+    env_logger::init();
     match Opt::from_args() {
         Opt::Init { dir } => init(dir).await,
         Opt::Episode { command } => episode(command).await,
