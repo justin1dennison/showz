@@ -5,7 +5,7 @@ pub(crate) const APP_NAME: &str = env!("CARGO_PKG_NAME");
 mod handlers;
 mod types;
 
-use handlers::{config, episode, init, resource, testing};
+use handlers::{config, episode, init, resource, testing, people};
 use types::{CliResult, EpisodeCommand};
 
 #[derive(StructOpt, Debug)]
@@ -20,6 +20,7 @@ enum Opt {
     },
     Resource {},
     Config,
+    Person,
     Testing,
 }
 
@@ -31,6 +32,7 @@ async fn main() -> CliResult {
         Opt::Episode { command } => episode(command).await,
         Opt::Config => config().await,
         Opt::Resource {} => resource().await,
+        Opt::Person => people().await,
         Opt::Testing => testing().await,
     }
 }
