@@ -6,7 +6,7 @@ pub(crate) const SCHEMA_GLOB: &str = "schema/*sql";
 mod handlers;
 mod types;
 
-use handlers::{config, episode, init, testing};
+use handlers::{config, episode, init, testing, resource};
 use types::{CliResult, EpisodeCommand};
 
 #[derive(StructOpt, Debug)]
@@ -19,6 +19,7 @@ enum Opt {
         #[structopt(subcommand)]
         command: EpisodeCommand,
     },
+    Resource {},
     Config,
     Testing,
 }
@@ -29,6 +30,7 @@ async fn main() -> CliResult {
         Opt::Init { dir } => init(dir).await,
         Opt::Episode { command } => episode(command).await,
         Opt::Config => config().await,
+        Opt::Resource {} => resource().await,
         Opt::Testing => testing().await,
     }
 }

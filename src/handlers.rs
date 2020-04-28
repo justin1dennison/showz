@@ -12,6 +12,11 @@ use rusqlite::{params, Connection};
 #[template(path = "config/default.toml.j2")]
 struct Config;
 
+async fn is_initialized(dir: String) -> bool {
+    let path: &PathBuf = &[dir, format!(".{}", APP_NAME)].iter().collect::<PathBuf>();
+    return path.exists().await && path.is_dir().await
+}
+
 pub async fn init(dir: String) -> CliResult {
     let path: &PathBuf = &[dir, format!(".{}", APP_NAME)].iter().collect::<PathBuf>();
     if !path.is_dir().await {
@@ -36,11 +41,23 @@ pub async fn testing() -> CliResult {
 }
 
 pub async fn episode(_command: EpisodeCommand) -> CliResult {
-    println!("Episodes");
+    if !is_initialized(".".to_string()).await {
+        return Err(anyhow::anyhow!("Project Not Initialized")); 
+    }
+    println!("episodes!");
     Ok(())
 }
 
 pub async fn config() -> CliResult {
-    println!("Config");
+    if !is_initialized(".".to_string()).await {
+        return Err(anyhow::anyhow!("Project Not Initialized")); 
+    }
+    Ok(())
+}
+
+pub async fn resource() -> CliResult {
+    if !is_initialized(".".to_string()).await {
+        return Err(anyhow::anyhow!("Project Not Initialized")); 
+    }
     Ok(())
 }
