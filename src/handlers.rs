@@ -73,3 +73,10 @@ pub async fn people() -> CliResult {
     }
     Ok(())
 }
+
+pub async fn build() -> CliResult {
+    if !is_initialized(".".to_string()).await {
+        return Err(anyhow::anyhow!("Project Not Initialized"));
+    }
+    Ok(())
+}
